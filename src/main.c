@@ -26,7 +26,8 @@ bool is_valid(int grid[9][9], int row, int col, int number)
         if (grid[i][col] == number)
             return false;
     }
-    Check if the number is already in the subgrid int subgrid_row = (row / 3) * 3;
+    // Check if the number is already in the subgrid
+    int subgrid_row = (row / 3) * 3;
     int subgrid_col = (col / 3) * 3;
     for (int i = subgrid_row; i < subgrid_row + 3; i++)
     {
@@ -39,7 +40,48 @@ bool is_valid(int grid[9][9], int row, int col, int number)
     return true;
 }
 
-
+void sudoku_solve(int grid[9][9])
+{
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (grid[i][j] == 0)
+            {
+                int number = 1;
+                bool valid = false;
+                while (number < 10 && !valid)
+                {
+                    valid = is_valid(grid, i, j, number);
+                    if (valid)
+                    {
+                        grid[i][j] = number;
+                    }
+                    number++;
+                }
+            }
+        }
+    }
+}
+void sudoku_print(int grid[9][9])
+{
+    for (int i = 0; i < 9; i++)
+    {
+        if (i % 3 == 0 && i != 0)
+        {
+            printf("------+-------+------\n");
+        }
+        for (int j = 0; j < 9; j++)
+        {
+            if (j % 3 == 0 && j != 0)
+            {
+                printf("| ");
+            }
+            printf("%d ", grid[i][j]);
+        }
+        printf("\n");
+    }
+}
 int main()
 {
     int sudoku_grid[9][9] = {
@@ -52,4 +94,8 @@ int main()
         {0, 0, 0, 6, 0, 3, 0, 7, 0},
         {5, 0, 0, 2, 0, 0, 0, 0, 0},
         {1, 0, 4, 0, 0, 0, 0, 0, 0}};
+    sudoku_print(sudoku_grid);
+    printf("\n");
+    sudoku_solve(sudoku_grid);
+    sudoku_print(sudoku_grid);
 }
