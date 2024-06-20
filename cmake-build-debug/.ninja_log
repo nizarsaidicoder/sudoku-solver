@@ -1,4 +1,0 @@
-# ninja log v5
-2	271	7405853297913004	build.ninja	3e318d860f36d182
-0	150	7405854044029376	CMakeFiles/sudoku_solver.dir/main.c.obj	2dacd49454f7f7f8
-159	313	7405854045620315	sudoku_solver.exe	7c00404766a084d8
